@@ -1,8 +1,13 @@
 const socket = io().connect();
 
 const canvas = /** @type {HTMLCanvasElement} */ (document.getElementById('canvas'));
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+
+function resize_canvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resize_canvas);
+resize_canvas();
 
 const ctx = canvas.getContext('2d');
 
@@ -90,5 +95,5 @@ function scheduleDraw() {
   });
 }
 
-draw();
 scheduleDraw();
+draw();
