@@ -8,10 +8,13 @@ Example game
 2. Arrow key movement
 
 #### Tech
-- Node.js
-- No client framework, 2d canvas
-- Socket.io
-- No build tools
+- [x] Node.js
+- [x] No client framework, 2d canvas
+- [x] Socket.io
+- [x] No build tools
+
+#### Also done
+- [x] Handle players joining and leaving
 
 ### 0.2
 
