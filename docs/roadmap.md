@@ -21,8 +21,7 @@ Example game
 Improve build tools
 
 1. Add Rollup
-3. Add TypeScript
-2. Modularize code
+2. Add TypeScript
 
 ### 0.3
 
