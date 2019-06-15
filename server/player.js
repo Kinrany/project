@@ -33,39 +33,39 @@ class Player {
    * @param {Player} player
    * @param {Player[]} moved_players
    */
-  static send_players_moved(player, moved_players) {
-    player.socket.send({
-      tag: 'players_moved',
-      value: moved_players.map(({id, game_state}) => ({
+  static emit_players_moved(player, moved_players) {
+    player.socket.emit(
+      'players_moved',
+      moved_players.map(({id, game_state}) => ({
         id,
         game_state
       }))
-    });
+    );
   }
 
   /**
    * @param {Player} player
    * @param {Player} connected_player
    */
-  static send_player_joined(player, connected_player) {
-    player.socket.send({
-      tag: 'player_joined',
-      value: {
+  static emit_player_joined(player, connected_player) {
+    player.socket.emit(
+      'player_joined',
+      {
         id: connected_player.id,
         game_state: connected_player.game_state
       }
-    });
+    );
   }
 
   /**
    * @param {Player} player
    * @param {Player} disconnected_player
    */
-  static send_player_left(player, disconnected_player) {
-    player.socket.send({
-      tag: 'player_left',
-      value: disconnected_player.id
-    });
+  static emit_player_left(player, disconnected_player) {
+    player.socket.emit(
+      'player_left',
+      disconnected_player.id
+    );
   }
 }
 

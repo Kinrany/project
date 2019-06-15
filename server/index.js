@@ -31,7 +31,7 @@ function registerPlayer(socket) {
  */
 const onDisconnect = (disconnected_player) => () => {
   console.log(`Player ${disconnected_player.id} disconnected`);
-  players.forEach(player => void Player.send_player_left(player, disconnected_player));
+  players.forEach(player => void Player.emit_player_left(player, disconnected_player));
   players.delete(disconnected_player.id);
 }
 
@@ -47,11 +47,11 @@ function onConnection(socket) {
   // send the new player info about every other player
   Array.from(players.values())
     .filter(player => player.id !== connected_player.id)
-    .forEach(player => void Player.send_player_joined(connected_player, player));
+    .forEach(player => void Player.emit_player_joined(connected_player, player));
 
   // tell everyone (including the new player)
   // that the new player joined
-  players.forEach(player => void Player.send_player_joined(player, connected_player));
+  players.forEach(player => void Player.emit_player_joined(player, connected_player));
 }
 
 io.on('connection', onConnection);
@@ -61,7 +61,7 @@ setInterval(() => {
     player.game_state = Player.update_game_state(player)
   });
   players.forEach(player => {
-    Player.send_players_moved(player, Array.from(players.values()))
+    Player.emit_players_moved(player, Array.from(players.values()))
   });
 
 }, 50);

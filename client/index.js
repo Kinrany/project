@@ -53,35 +53,34 @@ function draw() {
   }
 }
 
-socket.on('message', (event) => {
-  switch (event.tag) {
-    case 'players_moved': {
-      /** @type {Pick<Player, 'id' | 'game_state'>[]} */
-      const moved_players = event.value;
-      moved_players
-        .filter(({id}) => players.has(id))
-        .forEach(({id, game_state}) => {
-          players.get(id).game_state = game_state;
-        });
-    }
-    break;
+const event_handlers = {
+  /** @param {Pick<Player, 'id' | 'game_state'>[]} moved_players */
+  players_moved(moved_players) {
+    moved_players
+      .filter(({id}) => players.has(id))
+      .forEach(({id, game_state}) => {
+        players.get(id).game_state = game_state;
+      });
+  },
 
-    case 'player_joined': {
-      const {id, game_state} = event.value;
-      players.set(id, new Player(id, game_state));
-    }
-    break;
+  /**
+   * @param {Pick<Player, 'id' | 'game_state'>} value
+   */
+  player_joined(value) {
+    const {id, game_state} = value;
+    players.set(id, new Player(id, game_state));
+  },
 
-    case 'player_left': {
-      const id = event.value;
-      players.delete(id);
-    }
-    break;
-
-    default: {
-      console.log('Unknown event:', event);
-    }
+  /**
+   * @param {Player['id']} id
+   */
+  player_left(id) {
+    players.delete(id);
   }
+}
+
+Object.entries(event_handlers).forEach(([event, handler]) => {
+  socket.on(event, handler);
 });
 
 function scheduleDraw() {
