@@ -32,8 +32,7 @@ Extract game-specific code into a single module
 
 ### 0.4
 
-- Add immer.js
-- Make it possible for an event
+1. Make it possible for an event
   to schedule another event
 
 ### 0.5
