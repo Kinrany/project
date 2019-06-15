@@ -26,6 +26,30 @@ function registerPlayer(socket) {
   return player;
 }
 
+const move_distance_per_keypress = 10;
+
+/** @type {Record<string, (p: Player) => void>} */
+const game_event_handlers = {
+  move_up(player) {
+    player.game_state = Player.move(player, {x: 0, y: -move_distance_per_keypress});
+  },
+  move_left(player) {
+    player.game_state = Player.move(player, {x: -move_distance_per_keypress, y: 0});
+  },
+  move_down(player) {
+    player.game_state = Player.move(player, {x: 0, y: move_distance_per_keypress});
+  },
+  move_right(player) {
+    player.game_state = Player.move(player, {x: move_distance_per_keypress, y: 0});
+  },
+};
+
+function emit_players_moved() {
+  players.forEach(player => {
+    Player.emit_players_moved(player, Array.from(players.values()))
+  });
+}
+
 /**
  * @param {Player} disconnected_player
  */
@@ -43,6 +67,10 @@ function onConnection(socket) {
   console.log(`Player ${connected_player.id} connected`);
 
   socket.on('disconnect', onDisconnect(connected_player));
+  Object.entries(game_event_handlers).forEach(([event, handler]) => {
+    socket.on(event, () => handler(connected_player));
+    emit_players_moved();
+  });
 
   // send the new player info about every other player
   Array.from(players.values())
@@ -58,10 +86,8 @@ io.on('connection', onConnection);
 
 setInterval(() => {
   players.forEach(player => {
-    player.game_state = Player.update_game_state(player)
+    player.game_state = Player.move_randomly(player)
   });
-  players.forEach(player => {
-    Player.emit_players_moved(player, Array.from(players.values()))
-  });
+  emit_players_moved();
 
 }, 50);

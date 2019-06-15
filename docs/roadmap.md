@@ -5,7 +5,7 @@
 Example game
 
 1. [x] Each player is a circle
-2. Arrow key movement
+2. [x] Arrow key movement
 
 #### Tech
 - [x] Node.js

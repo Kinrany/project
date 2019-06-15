@@ -19,10 +19,20 @@ class Player {
    * @param {Player} player
    * @returns {Player['game_state']}
    */
-  static update_game_state(player) {
+  static move_randomly(player) {
+    const dx = (Math.random() - .5) * 1;
+    const dy = (Math.random() - .5) * 1;
+    return Player.move(player, {x: dx, y: dy});
+  }
+
+  /**
+   * @param {Player} player
+   * @param {Point} dxdy
+   * @returns {Player['game_state']}
+   */
+  static move(player, dxdy) {
     const {x, y} = player.game_state;
-    const dx = (Math.random() - .5) * 10;
-    const dy = (Math.random() - .5) * 10;
+    const {x: dx, y: dy} = dxdy;
     return {
       x: x + dx,
       y: y + dy,

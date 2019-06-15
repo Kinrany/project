@@ -58,7 +58,7 @@ function draw() {
   }
 }
 
-const event_handlers = {
+const game_event_handlers = {
   /** @param {Pick<Player, 'id' | 'game_state'>[]} moved_players */
   players_moved(moved_players) {
     moved_players
@@ -84,7 +84,7 @@ const event_handlers = {
   }
 }
 
-Object.entries(event_handlers).forEach(([event, handler]) => {
+Object.entries(game_event_handlers).forEach(([event, handler]) => {
   socket.on(event, handler);
 });
 
@@ -97,3 +97,20 @@ function scheduleDraw() {
 
 scheduleDraw();
 draw();
+
+const keyboard_event_game_event = {
+  w: 'move_up',
+  'ArrowUp': 'move_up',
+  a: 'move_left',
+  'ArrowLeft': 'move_left',
+  s: 'move_down',
+  'ArrowDown': 'move_down',
+  d: 'move_right',
+  'ArrowRight': 'move_right',
+};
+
+window.addEventListener('keydown', (event) => {
+  if (event.key in keyboard_event_game_event) {
+    socket.emit(keyboard_event_game_event[event.key]);
+  }
+});
