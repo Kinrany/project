@@ -1,0 +1,65 @@
+## Roadmap
+
+### 0.1
+
+Example game
+
+1. Each player is a circle
+2. Arrow key movement
+
+#### Tech
+- Node.js
+- No client framework, 2d canvas
+- Socket.io
+- No build tools
+
+### 0.2
+
+Improve build tools
+
+1. Add Rollup
+2. Modularize code
+
+### 0.3
+
+Extract game-specific code into a single module
+
+1. Browser view setup function
+2. Initial game state
+3. Browser view update function
+4. "Player joined" event handler
+5. "Player moved" event handler
+
+### 0.4
+
+- Add immer.js
+- Make it possible for an event
+  to schedule another event
+
+### 0.5
+
+Improve the game
+
+1. Left click to shoot
+   - Start with three bullets
+2. Right click to slash
+   - Jump forward
+   - Kill enemies in the way
+   - Freeze for half a second
+3. Dead players drop their bullets
+4. Respawn after 5 seconds
+
+### Before 1.0
+
+Extract more game-specific code
+
+1. "Game started" event handler
+2. "Player left" event handler
+3. Separate player input from events
+
+### After 1.0
+
+1. State filters determine which part of game state
+   to share with the player
+2. Event filters determine which events
+   to share with the player
