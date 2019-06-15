@@ -98,19 +98,19 @@ function scheduleDraw() {
 scheduleDraw();
 draw();
 
-const keyboard_event_game_event = {
-  w: 'move_up',
-  'ArrowUp': 'move_up',
-  a: 'move_left',
-  'ArrowLeft': 'move_left',
-  s: 'move_down',
-  'ArrowDown': 'move_down',
-  d: 'move_right',
-  'ArrowRight': 'move_right',
+const keydown_code_to_game_event = {
+  KeyW: 'move_up',
+  ArrowUp: 'move_up',
+  KeyA: 'move_left',
+  ArrowLeft: 'move_left',
+  KeyS: 'move_down',
+  ArrowDown: 'move_down',
+  KeyD: 'move_right',
+  ArrowRight: 'move_right',
 };
 
 window.addEventListener('keydown', (event) => {
-  if (event.key in keyboard_event_game_event) {
-    socket.emit(keyboard_event_game_event[event.key]);
+  if (event.code in keydown_code_to_game_event) {
+    socket.emit(keydown_code_to_game_event[event.code]);
   }
 });
