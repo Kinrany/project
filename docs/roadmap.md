@@ -21,6 +21,7 @@ Example game
 Improve build tools
 
 1. Add Rollup
+3. Add TypeScript
 2. Modularize code
 
 ### 0.3
@@ -34,9 +35,6 @@ Extract game-specific code into a single module
 5. "Player moved" event handler
 
 ### 0.4
-
-1. Make it possible for an event
-  to schedule another event
 
 ### 0.5
 
@@ -55,9 +53,12 @@ Improve the game
 
 Extract more game-specific code
 
-1. "Game started" event handler
-2. "Player left" event handler
-3. Separate player input from events
+
+- "Game started" event handler
+- "Player left" event handler
+- Separate player input from events
+- Make it possible for an event
+  to schedule another event
 
 ### After 1.0
 
