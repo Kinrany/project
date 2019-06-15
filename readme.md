@@ -1,9 +1,8 @@
 ## Development
 
-```bash
-npm install
-npm server
-```
+`npm install` \
+`node server` \
+open `localhost:8080`
 
 ## Roadmap
 
