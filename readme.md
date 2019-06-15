@@ -2,7 +2,7 @@
 
 ```bash
 npm install
-node server
+npm run start
 ```
 Then open `localhost:8080`
 
