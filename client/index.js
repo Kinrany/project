@@ -22,7 +22,6 @@ class Player {
   }
 
   /**
-   *
    * @param {CanvasRenderingContext2D} ctx
    */
   draw(ctx) {

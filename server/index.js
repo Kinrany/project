@@ -21,7 +21,7 @@ const players = new Map();
  */
 function registerPlayer(socket) {
   const id = ++last_player_id;
-  const player = new Player(id, socket, {x: 100, y: 100});
+  const player = new Player(id, socket);
   players.set(id, player);
   return player;
 }
@@ -44,6 +44,13 @@ function onConnection(socket) {
 
   socket.on('disconnect', onDisconnect(connected_player));
 
+  // send the new player info about every other player
+  Array.from(players.values())
+    .filter(player => player.id !== connected_player.id)
+    .forEach(player => void Player.send_player_joined(connected_player, player));
+
+  // tell everyone (including the new player)
+  // that the new player joined
   players.forEach(player => void Player.send_player_joined(player, connected_player));
 }
 

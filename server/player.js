@@ -7,12 +7,11 @@ class Player {
    * @constructor
    * @param {number} id
    * @param {SocketIO.Socket} socket
-   * @param {Point} game_state
    */
-  constructor(id, socket, game_state) {
+  constructor(id, socket) {
     this.id = id;
     this.socket = socket;
-    this.game_state = game_state;
+    this.game_state = {x: 300, y: 200};
     this.joinedAt = new Date();
   }
 

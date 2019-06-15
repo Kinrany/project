@@ -4,7 +4,7 @@
 
 Example game
 
-1. Each player is a circle
+1. [x] Each player is a circle
 2. Arrow key movement
 
 #### Tech
