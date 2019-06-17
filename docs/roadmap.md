@@ -21,7 +21,7 @@ Example game
 Improve build tools
 
 1. Add Rollup
-2. Add TypeScript
+2. [x] Add TypeScript
 
 ### 0.3
 
