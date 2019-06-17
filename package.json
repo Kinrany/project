@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "main": "server/index.js",
   "scripts": {
-    "build": "tsc -p client",
+    "build-client": "tsc -p client",
     "start": "tsc -p server && node server/dist"
   },
   "repository": {
