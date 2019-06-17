@@ -1,6 +1,6 @@
 const socket = io().connect();
 
-const canvas = /** @type {HTMLCanvasElement} */ (document.getElementById('canvas'));
+const canvas = document.getElementById('canvas') as HTMLCanvasElement;
 
 function resize_canvas() {
   canvas.width = window.innerWidth;
@@ -9,27 +9,20 @@ function resize_canvas() {
 window.addEventListener('resize', resize_canvas);
 resize_canvas();
 
-const ctx = canvas.getContext('2d');
+const ctx = canvas.getContext('2d')!;
 
-/**
- * @typedef {{x: number, y: number}} Point
- */
+interface Point {
+  x: number,
+  y: number,
+}
 
 class Player {
-  /**
-   * @constructor
-   * @param {number} id
-   * @param {Point} game_state
-   */
-  constructor(id, game_state) {
-    this.id = id;
-    this.game_state = game_state;
-  }
+  constructor(
+    readonly id: number,
+    public game_state: Point,
+  ) {}
 
-  /**
-   * @param {CanvasRenderingContext2D} ctx
-   */
-  draw(ctx) {
+  draw(ctx: CanvasRenderingContext2D) {
     const {x, y} = this.game_state;
     const radius = 20;
 
@@ -44,8 +37,7 @@ class Player {
   }
 }
 
-/** @type {Map<number, Player>} */
-const players = new Map();
+const players = new Map<Player['id'], Player>();
 
 function draw() {
   // background
@@ -53,35 +45,27 @@ function draw() {
   ctx.fillStyle = 'lightgreen';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  for (const player of players.values()) {
-    player.draw(ctx);
-  }
+  // players
+  players.forEach(player => player.draw(ctx));
 }
 
 const game_event_handlers = {
-  /** @param {Pick<Player, 'id' | 'game_state'>[]} moved_players */
-  players_moved(moved_players) {
-    moved_players
-      .filter(({id}) => players.has(id))
-      .forEach(({id, game_state}) => {
-        players.get(id).game_state = game_state;
-      });
+  players_moved(moved_players: Pick<Player, 'id' | 'game_state'>[]) {
+    moved_players.forEach(({id, game_state}) => {
+      const player = players.get(id);
+      if (player) {
+        player.game_state = game_state;
+      }
+    });
   },
 
-  /**
-   * @param {Pick<Player, 'id' | 'game_state'>} value
-   */
-  player_joined(value) {
-    const {id, game_state} = value;
+  player_joined({id, game_state}: Pick<Player, 'id' | 'game_state'>) {
     players.set(id, new Player(id, game_state));
   },
 
-  /**
-   * @param {Player['id']} id
-   */
-  player_left(id) {
+  player_left(id: Player['id']) {
     players.delete(id);
-  }
+  },
 }
 
 Object.entries(game_event_handlers).forEach(([event, handler]) => {
@@ -108,9 +92,10 @@ const keydown_code_to_game_event = {
   KeyD: 'move_right',
   ArrowRight: 'move_right',
 };
+type KeydownCode = keyof typeof keydown_code_to_game_event;
 
 window.addEventListener('keydown', (event) => {
   if (event.code in keydown_code_to_game_event) {
-    socket.emit(keydown_code_to_game_event[event.code]);
+    socket.emit(keydown_code_to_game_event[event.code as KeydownCode]);
   }
 });

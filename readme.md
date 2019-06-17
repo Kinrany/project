@@ -2,9 +2,10 @@
 
 ```bash
 npm install
+npm run build
 npm run start
 ```
-Then open `localhost:8080`
+The dev server will start at `localhost:8080`
 
 ## Roadmap
 
