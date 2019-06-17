@@ -1,7 +1,7 @@
-const http = require('http');
-const express = require('express');
-const socketIo = require('socket.io');
-const {Player} = require('./player');
+import http from 'http';
+import express from 'express';
+import socketIo from 'socket.io';
+import {Player} from './player';
 
 const app = express();
 app.use(express.static('client'));
@@ -13,13 +13,9 @@ server.listen(port, () => {
 });
 
 let last_player_id = 0;
-/** @type {Map<Player['id'], Player>} */
-const players = new Map();
+const players = new Map<Player['id'], Player>();
 
-/**
- * @param {SocketIO.Socket} socket
- */
-function registerPlayer(socket) {
+function registerPlayer(socket: SocketIO.Socket) {
   const id = ++last_player_id;
   const player = new Player(id, socket);
   players.set(id, player);
@@ -28,8 +24,7 @@ function registerPlayer(socket) {
 
 const move_distance_per_keypress = 10;
 
-/** @type {Record<string, (p: Player) => void>} */
-const game_event_handlers = {
+const game_event_handlers: Record<string, (p: Player) => void> = {
   move_up(player) {
     player.game_state = Player.move(player, {x: 0, y: -move_distance_per_keypress});
   },
@@ -50,19 +45,13 @@ function emit_players_moved() {
   });
 }
 
-/**
- * @param {Player} disconnected_player
- */
-const onDisconnect = (disconnected_player) => () => {
+const onDisconnect = (disconnected_player: Player) => () => {
   console.log(`Player ${disconnected_player.id} disconnected`);
   players.forEach(player => void Player.emit_player_left(player, disconnected_player));
   players.delete(disconnected_player.id);
 }
 
-/**
- * @param {SocketIO.Socket} socket
- */
-function onConnection(socket) {
+function onConnection(socket: SocketIO.Socket) {
   const connected_player = registerPlayer(socket);
   console.log(`Player ${connected_player.id} connected`);
 

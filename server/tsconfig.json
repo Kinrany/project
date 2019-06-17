@@ -1,11 +1,22 @@
 {
   "compilerOptions": {
-    "allowJs": true,
-    "checkJs": true,
-    "noEmit": true,
-    "target": "esnext",
+    // project settings
+    "composite": true,
+    "rootDir": "src",
+    "outDir": "dist",
+
+    // module resolution
     "module": "commonjs",
+    "moduleResolution": "node",
     "resolveJsonModule": true,
-    "strict": false
+    "esModuleInterop": true,
+    "importHelpers": true,
+
+    // type checking
+    "target": "es2015",
+    "lib": ["dom", "es2015", "dom.iterable", "scripthost"],
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
   },
 }
