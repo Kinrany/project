@@ -1,11 +1,6 @@
 ## Development
 
-```bash
-npm install
-npm run build-client
-npm run start
-```
-The dev server will start at `localhost:8080`
+TODO: development instructions for Rust version
 
 ## Roadmap
 

@@ -18,10 +18,7 @@ Example game
 
 ### 0.2
 
-Improve build tools
-
-1. Add Rollup
-2. [x] Add TypeScript
+Rewrite in Rust
 
 ### 0.3
 
@@ -34,8 +31,6 @@ Extract game-specific code into a single module
 5. "Player moved" event handler
 
 ### 0.4
-
-### 0.5
 
 Improve the game
 
