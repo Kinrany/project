@@ -8,3 +8,4 @@ edition = "2018"
 
 [dependencies]
 game = { path = "../game" }
+actix-web = "1.0.3"
