@@ -8,7 +8,7 @@ extern "C" {
 }
 
 #[wasm_bindgen(start)]
-pub fn main() -> Result<(), ()> {
+pub fn main() -> Result<(), JsValue> {
     log("Hello, client!");
     let outcome = Outcome::start();
     let outcome = outcome.failed().unwrap();

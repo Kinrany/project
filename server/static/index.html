@@ -25,6 +25,13 @@
 
 <script type="module">
   console.log("Hello js!");
+
+  import init, { main } from '/wasm/client.js';
+  async function run() {
+    await init();
+    main();
+  }
+  run();
 </script>
 
 </html>

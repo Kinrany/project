@@ -9,7 +9,8 @@ fn main() {
     let addr = "127.0.0.1:8080";
     HttpServer::new(|| {
         App::new()
-        .service(fs::Files::new("/", "./static").show_files_listing())
+        .service(fs::Files::new("/wasm", "client/pkg").show_files_listing())
+        .service(fs::Files::new("/static", "server/static").show_files_listing())
     })
     .bind(addr)
     .expect(&("Failed to bind to ".to_string() + addr))
