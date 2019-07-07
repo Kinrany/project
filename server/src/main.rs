@@ -1,21 +1,15 @@
-use actix_web::{web, App, HttpResponse, HttpServer, Responder};
-use game::Outcome;
-
-fn index() -> impl Responder {
-    HttpResponse::Ok().body("Hello world!")
-}
-
-fn index2() -> impl Responder {
-    HttpResponse::Ok().body("Hello world again!")
-}
+use {
+    actix_files as fs,
+    actix_web::{App, HttpServer},
+    game::Outcome,
+};
 
 fn main() {
     println!("Hello, server!");
     let addr = "127.0.0.1:8080";
     HttpServer::new(|| {
         App::new()
-        .route("/", web::get().to(index))
-        .route("/again", web::get().to(index2))
+        .service(fs::Files::new("/", "./static").show_files_listing())
     })
     .bind(addr)
     .expect(&("Failed to bind to ".to_string() + addr))
