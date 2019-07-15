@@ -24,12 +24,10 @@
 </body>
 
 <script type="module">
-  console.log("Hello js!");
-
-  import init, { main } from '/wasm/client.js';
+  import init, * as lib from '/wasm/client.js';
   async function run() {
     await init();
-    main();
+    lib.start();
   }
   run();
 </script>
