@@ -1,15 +1,10 @@
 use {
-  crate::log,
   wasm_bindgen::{
     prelude::*,
     JsCast,
   },
   web_sys::{ErrorEvent, MessageEvent, WebSocket},
 };
-
-macro_rules! log {
-  ($($t:tt)*) => (log::log(&format_args!($($t)*).to_string()))
-}
 
 pub fn create() -> WebSocket {
   let ws = WebSocket::new("ws://localhost:8080/ws").unwrap();
