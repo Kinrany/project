@@ -898,6 +898,9 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 [[package]]
 name = "game"
 version = "0.1.0"
+dependencies = [
+ "rand 0.7.0 (registry+https://github.com/rust-lang/crates.io-index)",
+]
 
 [[package]]
 name = "getrandom"
@@ -1836,6 +1839,7 @@ dependencies = [
  "actix-web 1.0.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "actix-web-actors 1.0.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "game 0.1.0",
+ "rand 0.7.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]

@@ -10,7 +10,6 @@ use {
     HttpServer,
   },
   actix_web_actors::ws,
-  game::Outcome,
 };
 
 struct MyWebSocket(());
@@ -50,4 +49,6 @@ fn main() {
   .expect(&("Failed to bind to ".to_string() + addr))
   .run()
   .expect("Failed to run");
+
+  let _game = game::Game::new(12345678);
 }

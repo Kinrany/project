@@ -2,7 +2,7 @@
 
 ```bash
 # build wasm module in client/pkg
-wasm-pack build client --target web
+wasm-pack build --release client --target web
 
 # start the server
 cargo run --release
