@@ -6,6 +6,7 @@ pub mod websocket;
 mod face;
 
 use wasm_bindgen::prelude::*;
+use context2d::Draw;
 
 #[wasm_bindgen(start)]
 pub fn start() -> Result<(), JsValue> {
@@ -14,7 +15,7 @@ pub fn start() -> Result<(), JsValue> {
   let cvs = canvas::get();
   let ctx = context2d::new(cvs);
 
-  face::draw(ctx);
+  face::face().draw(&ctx)?;
 
   let _ws = websocket::create();
 

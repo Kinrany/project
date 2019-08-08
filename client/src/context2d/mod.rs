@@ -1,3 +1,11 @@
+mod command;
+mod draw;
+
+pub use {
+  command::{Command, Path},
+  draw::Draw,
+};
+
 use wasm_bindgen::JsCast;
 
 pub type Context2d = web_sys::CanvasRenderingContext2d;
