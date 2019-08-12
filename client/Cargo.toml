@@ -19,6 +19,7 @@ features = [
   'Element',
   'ErrorEvent',
   'HtmlCanvasElement',
+  'HtmlElement',
   'MessageEvent',
   'WebSocket',
   'Window',
