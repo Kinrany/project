@@ -30,6 +30,7 @@ fn main() {
 
     ws::listen("127.0.0.1:8081", |out| {
       move |msg| {
+        println!("WS: {:?}", &msg);
         out.send(match msg {
           Text(text) => text,
           Binary(_) => String::from("Error: can't handle binary"),
