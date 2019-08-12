@@ -7,7 +7,7 @@ use {
 };
 
 pub fn create() -> WebSocket {
-  let ws = WebSocket::new("ws://localhost:8080/ws").unwrap();
+  let ws = WebSocket::new("ws://localhost:8081").unwrap();
   log!("websocket created");
 
   // create callback
